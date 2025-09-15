@@ -107,6 +107,27 @@ body {
   align-items: center;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #2D3748;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.mobile-menu-btn:hover {
+  background-color: #f7fafc;
+}
+
 .header-left h1 {
   font-size: 24px;
   color: #2D3748;
@@ -714,7 +735,15 @@ body {
 }
 
 @media (max-width: 640px) {
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .sidebar {
+    position: fixed;
+    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s;
   }
@@ -735,5 +764,22 @@ body {
   
   .search-bar input {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .sidebar-overlay.open {
+    display: block;
   }
 }

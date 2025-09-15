@@ -3,7 +3,8 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   MagnifyingGlassIcon,
   BellIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
+  Bars3Icon
 } from '@heroicons/react/24/outline';
 
 const Layout = () => {
@@ -22,6 +23,14 @@ const Layout = () => {
 
   return (
     <div className="layout">
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className={`sidebar-overlay ${sidebarOpen ? 'open' : ''}`}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
@@ -40,7 +49,10 @@ const Layout = () => {
               <div
                 key={item.name}
                 className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
-                onClick={() => navigate(item.href)}
+                onClick={() => {
+                  navigate(item.href);
+                  setSidebarOpen(false); // Close sidebar on navigation
+                }}
               >
                 {item.name}
               </div>
@@ -53,14 +65,22 @@ const Layout = () => {
       <div className="main-content">
         <header className="header">
           <div className="header-left">
-            <h1>
-              {location.pathname === '/dashboard' && 'Dashboard'}
-              {location.pathname === '/hotels' && 'Liste des hôtels'}
-            </h1>
-            <p>
-              {location.pathname === '/dashboard' && 'Bienvenue sur RED Product'}
-              {location.pathname === '/hotels' && 'Hôtels 8'}
-            </p>
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              <Bars3Icon className="w-6 h-6" />
+            </button>
+            <div>
+              <h1>
+                {location.pathname === '/dashboard' && 'Dashboard'}
+                {location.pathname === '/hotels' && 'Liste des hôtels'}
+              </h1>
+              <p>
+                {location.pathname === '/dashboard' && 'Bienvenue sur RED Product'}
+                {location.pathname === '/hotels' && 'Hôtels 8'}
+              </p>
+            </div>
           </div>
           
           <div className="header-right">
