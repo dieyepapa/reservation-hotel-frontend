@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
-  MagnifyingGlassIcon,
   BellIcon,
   ChevronRightIcon,
-  Bars3Icon
+  Bars3Icon,
+  ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline';
+import { useAuth } from '../contexts/AuthContext';
 
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard' },
@@ -58,6 +60,17 @@ const Layout = () => {
               </div>
             ))}
           </div>
+          
+          {/* Logout button at bottom of sidebar */}
+          <div className="sidebar-logout">
+            <button 
+              className="logout-btn-sidebar"
+              onClick={logout}
+            >
+              <ArrowRightOnRectangleIcon className="w-5 h-5" />
+              <span>Déconnexion</span>
+            </button>
+          </div>
         </nav>
       </div>
 
@@ -74,25 +87,14 @@ const Layout = () => {
             <div>
               <h1>
                 {location.pathname === '/dashboard' && 'Dashboard'}
-                {location.pathname === '/hotels' && 'Liste des hôtels'}
               </h1>
               <p>
                 {location.pathname === '/dashboard' && 'Bienvenue sur RED Product'}
-                {location.pathname === '/hotels' && 'Hôtels 8'}
               </p>
             </div>
           </div>
           
           <div className="header-right">
-            <div className="search-bar">
-              <input 
-                type="text" 
-                placeholder="Recherche" 
-                className="form-input"
-              />
-              <MagnifyingGlassIcon className="search-icon w-4 h-4" />
-            </div>
-            
             <div className="notification">
               <BellIcon className="w-6 h-6 text-gray-400" />
               <span className="notification-badge">3</span>

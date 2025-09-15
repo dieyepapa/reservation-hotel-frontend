@@ -44,11 +44,11 @@ function App() {
                 <Layout />
               </ProtectedRoute>
             }>
-              <Route index element={<Navigate to="/dashboard" replace />} />
+              <Route index element={<Navigate to="/login" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="hotels" element={<HotelsList />} />
               <Route path="hotels/create" element={<CreateHotel />} />
-              <Route path="hotels/edit/:id" element={<EditHotel />} />
+              <Route path="hotels/:id/edit" element={<EditHotel />} />
             </Route>
           </Routes>
         </div>
