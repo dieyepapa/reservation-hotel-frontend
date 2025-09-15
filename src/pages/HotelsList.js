@@ -66,7 +66,7 @@ const HotelsList = () => {
       <div className="hotels-header">
         <div>
           <h1 className="hotels-title">Liste des hôtels</h1>
-          <p className="hotels-count">Hôtels {hotels.length}</p>
+          <p className="hotels-count"> {hotels.length} Hôtels</p>
         </div>
         <button 
           className="create-hotel-btn"
